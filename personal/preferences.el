@@ -1,3 +1,7 @@
+;;;; PRELUDE
+(add-hook 'prog-mode-hook 'prelude-turn-off-whitespace t)
+
+
 ;;;; FULLL SCREEEENN
 (global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
 
@@ -13,7 +17,7 @@
    (or (package-installed-p package)
        (if (y-or-n-p (format "Package %s is missing. Install it? " package))
            (package-install package))))
- '(tidy rainbow-mode))
+ '(erlang scala-mode tidy rainbow-mode))
 
 (setq column-number-mode t)
 
@@ -31,35 +35,36 @@
 (show-paren-mode t)
 (setq nxml-child-indent 4)
 
+;; Spelling
 ;;;; ASpell for osx setup
 ;;(add-to-list 'exec-path "/usr/local/bin")
+(setq ispell-dictionary "english"
+      ;;ispell-list-command "list"
+      ispell-dictionary-alist
+      (let ((default '("[A-Za-z]" "[^A-Za-z]" "[']" nil
+                       ("-B" "-d" "english" "--dict-dir"
+                        "/Library/Application Support/cocoAspell/aspell6-en-6.0-0")
+                       nil iso-8859-1)))
+        `((nil ,@default)
+          ("english" ,@default))))
+;; This requires aspell, ispell or cocoAspell on os x
+(autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
+(add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
+(add-hook 'java-mode-hook (lambda () (flyspell-prog-mode)))
+(add-hook 'erlang-mode-hook (lambda () (flyspell-prog-mode)))
 
-;;(setq ispell-program-name "aspell"
-;;      ispell-dictionary "english"
-;;      ispell-list-command "list"
-;;      ispell-dictionary-alist
-;;      (let ((default '("[A-Za-z]" "[^A-Za-z]" "[']" nil
-;;                       ("-B" "-d" "english" "--dict-dir"
-;;                        "/Library/Application Support/cocoAspell/aspell6-en-6.0-0")
-;;                       nil iso-8859-1)))
-;;        `((nil ,@default)
-;;          ("english" ,@default))))
-
+;;Make dired happy with my system
+(when (eq system-type 'darwin)
+  (require 'ls-lisp)
+  (setq ls-lisp-use-insert-directory-program nil))
 
 ;;;; SCALA
-(add-to-list 'load-path
-             "/usr/local/scala/misc/scala-tool-support/emacs")
 (require 'scala-mode-auto)
-(yas/load-directory "/usr/local/scala/misc/scala-tool-support/emacs/contrib")
 (add-hook 'scala-mode-hook
           '(lambda ()
              (yas/minor-mode-on)))
 
 ;;;; ERLANG
-(setq load-path (cons  "/usr/local/lib/erlang/lib/tools-2.6.6.4/emacs"
-                       load-path))
-(setq erlang-root-dir "/usr/local/lib/erlang")
-(setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
 (add-hook 'erlang-mode-hook (lambda () (setq truncate-lines t)))
 (require 'erlang-start)
 

@@ -37,11 +37,3 @@
 ;; (setq tabbar-buffer-groups-function
 ;;      (lambda ()
 ;;	(list "All")))
-
-;; Spelling
-;; This requires aspell, ispell or cocoAspell on os x
-(autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
-
-(add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
-(add-hook 'java-mode-hook (lambda () (flyspell-prog-mode)))
-(add-hook 'erlang-mode-hook (lambda () (flyspell-prog-mode)))
