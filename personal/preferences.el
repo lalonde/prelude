@@ -17,7 +17,7 @@
    (or (package-installed-p package)
        (if (y-or-n-p (format "Package %s is missing. Install it? " package))
            (package-install package))))
- '(erlang scala-mode tidy rainbow-mode))
+ '(erlang scala-mode tidy rainbow-mode inf-ruby))
 
 (setq column-number-mode t)
 
@@ -74,6 +74,15 @@
 (require 'go-mode-load)
 (require 'protobuf-mode)
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+
+;;;; RUBY
+ (autoload 'ruby-mode "ruby-mode" "Major mode for ruby files" t)
+(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+(add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
+(autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
+(autoload 'inf-ruby-keys "inf-ruby" "" t)
+(eval-after-load 'ruby-mode '(add-hook 'ruby-mode-hook 'inf-ruby-keys))
+
 
 ;;;; TIDY
 (require 'tidy)
