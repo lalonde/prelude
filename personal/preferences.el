@@ -1,6 +1,10 @@
 ;;;; PRELUDE
 (add-hook 'prog-mode-hook 'prelude-turn-off-whitespace t)
 
+(set-default-font
+ "-apple-Inconsolata-medium-normal-normal-*-*-160-*-*-m-0-iso10646-1"
+ )
+
 
 ;;;; FULLL SCREEEENN
 (global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
