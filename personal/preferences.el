@@ -1,9 +1,11 @@
 ;;;; PRELUDE
 (add-hook 'prog-mode-hook 'prelude-turn-off-whitespace t)
 
-(set-default-font
- "-apple-Inconsolata-medium-normal-normal-*-*-160-*-*-m-0-iso10646-1"
- )
+;;(set-default-font
+;; "-apple-Inconsolata-medium-normal-normal-*-*-180-*-*-m-0-iso10646-1"
+;; )
+
+(set-face-attribute 'default nil :font  "-apple-Inconsolata-medium-normal-normal-*-*-180-*-*-m-0-iso10646-1")
 
 
 ;;;; FULLL SCREEEENN
@@ -21,7 +23,7 @@
    (or (package-installed-p package)
        (if (y-or-n-p (format "Package %s is missing. Install it? " package))
            (package-install package))))
- '(erlang scala-mode tidy rainbow-mode inf-ruby))
+ '(auto-complete erlang scala-mode tidy rainbow-mode inf-ruby go-mode protobuf-mode))
 
 (setq column-number-mode t)
 
@@ -30,9 +32,9 @@
 
 ;;;; Frame setup
 (setq default-frame-alist '( (top . 20)(left . 20)
-                             (width . 160) (height . 56)))
+                             (width . 160) (height . 50)))
 (setq initial-frame-alist '( (top . 20) (left . 20)
-                             (width . 160) (height . 56)))
+                             (width . 160) (height . 50)))
 
 (setq-default cursor-type 'bar)
 (setq indent-tabs-mode nil)
@@ -120,3 +122,9 @@
                 ("\\.PRC\\'" . plsql-mode) ("\\.FNC\\'" . plsql-mode)
                 ("\\.TRG\\'" . plsql-mode) ("\\.VW\\'" . plsql-mode))
               auto-mode-alist ))
+
+
+;;;; JAVA
+(require 'ajc-java-complete-config)
+(add-hook 'java-mode-hook 'ajc-java-complete-mode)
+(add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
