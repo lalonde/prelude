@@ -128,3 +128,7 @@
 (require 'ajc-java-complete-config)
 (add-hook 'java-mode-hook 'ajc-java-complete-mode)
 (add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
+
+(ac-set-trigger-key "TAB")
+(setq ac-auto-start nil)
+(setq ac-menu-height 20)
