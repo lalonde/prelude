@@ -133,3 +133,7 @@
 (ac-set-trigger-key "TAB")
 (setq ac-auto-start nil)
 (setq ac-menu-height 20)
+
+
+;;;; WEB
+(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
