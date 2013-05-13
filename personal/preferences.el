@@ -1,6 +1,7 @@
 ;;;; PRELUDE
 (add-hook 'prog-mode-hook 'prelude-turn-off-whitespace t)
 (add-hook 'text-mode-hook 'turn-off-auto-fill)
+(remove-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;;(set-default-font
 ;; "-apple-Inconsolata-medium-normal-normal-*-*-180-*-*-m-0-iso10646-1"
