@@ -140,6 +140,7 @@
 ;;(ac-set-trigger-key "TAB")
 ;;(setq ac-auto-start nil)
 ;;(setq ac-menu-height 20)
+(add-to-list 'load-path (concat prelude-dir "vendor/malabar-1.5-SNAPSHOT/lisp"))
 (require 'cedet)
 (semantic-load-enable-minimum-features) ;; or enable more if you wish
 (require 'malabar-mode)
