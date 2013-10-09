@@ -1,44 +1,9 @@
-;;;; CEDET
-(load-file  (concat prelude-dir "vendor/cedet-1.1/common/cedet.el"))
-(global-ede-mode 1)                      ; Enable the Project management system
-(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
-(global-srecode-minor-mode 1)            ; Enable template insertion menu
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Basic Editor Setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;; PRELUDE
-(add-hook 'prog-mode-hook 'prelude-turn-off-whitespace t)
-(add-hook 'text-mode-hook 'turn-off-auto-fill)
-(remove-hook 'text-mode-hook 'turn-on-auto-fill)
-
-;;(set-default-font
-;; "-apple-Inconsolata-medium-normal-normal-*-*-180-*-*-m-0-iso10646-1"
-;; )
-
+;;;; Font And Frame Setup
 (set-face-attribute 'default nil :font  "-apple-Inconsolata-medium-normal-normal-*-*-180-*-*-m-0-iso10646-1")
-
-
-;;;; FULLL SCREEEENN
-(global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
-
-;; Emacs 24 Package ext
-(require 'package)
-(add-to-list 'package-archives
-    '("marmalade" .
-      "http://marmalade-repo.org/packages/"))
-(package-initialize)
-
-(mapc
- (lambda (package)
-   (or (package-installed-p package)
-       (if (y-or-n-p (format "Package %s is missing. Install it? " package))
-           (package-install package))))
- '(auto-complete erlang scala-mode tidy rainbow-mode inf-ruby go-mode protobuf-mode cedet))
-
-(setq column-number-mode t)
-
-(setq visible-bell t)
-(tool-bar-mode 0)
-
-;;;; Frame setup
 (setq default-frame-alist '( (top . 20)(left . 20)
                              (width . 160) (height . 50)))
 (setq initial-frame-alist '( (top . 20) (left . 20)
@@ -51,7 +16,6 @@
 
 ;; Spelling
 ;;;; ASpell for osx setup
-;;(add-to-list 'exec-path "/usr/local/bin")
 (setq ispell-dictionary "english"
       ;;ispell-list-command "list"
       ispell-dictionary-alist
@@ -71,18 +35,46 @@
 (when (eq system-type 'darwin)
   (require 'ls-lisp)
   (setq ls-lisp-use-insert-directory-program nil))
+(put 'dired-find-alternate-file 'disabled nil)
 
-;;;; SCALA
-(require 'scala-mode-auto)
-(add-hook 'scala-mode-hook
-          '(lambda ()
-             (yas/minor-mode-on)))
+;; Emacs 24 Package ext
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" .
+               "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+(mapc
+ (lambda (package)
+   (or (package-installed-p package)
+       (if (y-or-n-p (format "Package %s is missing. Install it? " package))
+           (package-install package))))
+ '(auto-complete erlang scala-mode tidy rainbow-mode inf-ruby go-mode protobuf-mode cedet))
+
+(setq column-number-mode t)
+
+(setq visible-bell t)
+(tool-bar-mode 0)
+
+;;;; PRELUDE
+(setq prelude-whitespace nil)
+(add-hook 'text-mode-hook 'turn-off-auto-fill)
+(remove-hook 'text-mode-hook 'turn-on-auto-fill)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Programing Languages And Code Suppport
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;; CEDET
+(load-file  (concat prelude-dir "vendor/cedet-1.1/common/cedet.el"))
+(global-ede-mode 1)                      ; Enable the Project management system
+(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
+(global-srecode-minor-mode 1)            ; Enable template insertion menu
 
 ;;;; ERLANG
 (add-hook 'erlang-mode-hook (lambda () (setq truncate-lines t)))
 (require 'erlang-start)
-
-(put 'dired-find-alternate-file 'disabled nil)
 
 ;;;; GO
 (require 'go-mode-load)
@@ -97,6 +89,11 @@
 (autoload 'inf-ruby-keys "inf-ruby" "" t)
 (eval-after-load 'ruby-mode '(add-hook 'ruby-mode-hook 'inf-ruby-keys))
 
+;;;; SCALA
+(require 'scala-mode-auto)
+(add-hook 'scala-mode-hook
+          '(lambda ()
+             (yas/minor-mode-on)))
 
 ;;;; TIDY
 (require 'tidy)
@@ -111,9 +108,9 @@
 (setq sgml-validate-command "tidy"))
 (add-hook 'html-mode-hook 'my-html-mode-hook)
 
-;;;; MAC KEYS
-(global-set-key [s-left] 'beginning-of-line)
-(global-set-key [s-right] 'end-of-line)
+;;;; MAC KEYS dont think i use these anymore
+;;(global-set-key [s-left] 'beginning-of-line)
+;;(global-set-key [s-right] 'end-of-line)
 
 ;;;; SQLPLUS
 (require 'sqlplus)
@@ -133,6 +130,7 @@
 
 
 ;;;; JAVA
+;;;; AJC - disabled for now. trying malabar
 ;;(require 'ajc-java-complete-config)
 ;;(add-hook 'java-mode-hook 'ajc-java-complete-mode)
 ;;(add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
@@ -140,6 +138,7 @@
 ;;(ac-set-trigger-key "TAB")
 ;;(setq ac-auto-start nil)
 ;;(setq ac-menu-height 20)
+;;;; malabar-mode
 (add-to-list 'load-path (concat prelude-dir "vendor/malabar-1.5-SNAPSHOT/lisp"))
 (require 'cedet)
 (semantic-load-enable-minimum-features) ;; or enable more if you wish
