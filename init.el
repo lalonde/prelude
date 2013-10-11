@@ -31,6 +31,9 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
+;;Required to load before eieio. MUST KEEP ON UPDATES
+(load-file  (concat (file-name-directory load-file-name) "personal/cedet-bzr/cedet-devel-load.el"))
+
 ;;; Code:
 (defvar current-user
       (getenv

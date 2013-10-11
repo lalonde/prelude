@@ -4,10 +4,10 @@
 
 ;;;; Font And Frame Setup
 (set-face-attribute 'default nil :font  "-apple-Inconsolata-medium-normal-normal-*-*-180-*-*-m-0-iso10646-1")
-(setq default-frame-alist '( (top . 20)(left . 20)
-                             (width . 160) (height . 50)))
-(setq initial-frame-alist '( (top . 20) (left . 20)
-                             (width . 160) (height . 50)))
+;;(setq default-frame-alist '( (top . 20)(left . 20)
+;;                             (width . 160) (height . 50)))
+;;(setq initial-frame-alist '( (top . 20) (left . 20)
+;;                             (width . 160) (height . 50)))
 
 (setq-default cursor-type 'bar)
 (setq indent-tabs-mode nil)
@@ -67,10 +67,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;; CEDET
-(load-file  (concat prelude-dir "vendor/cedet-1.1/common/cedet.el"))
+(semantic-mode 1)
 (global-ede-mode 1)                      ; Enable the Project management system
-(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
-(global-srecode-minor-mode 1)            ; Enable template insertion menu
+;;(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
+;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
+;;(semantic-load-enable-minimum-features) ;; or enable more if you wish
 
 ;;;; ERLANG
 (add-hook 'erlang-mode-hook (lambda () (setq truncate-lines t)))
@@ -139,12 +140,15 @@
 ;;(setq ac-auto-start nil)
 ;;(setq ac-menu-height 20)
 ;;;; malabar-mode
-(add-to-list 'load-path (concat prelude-dir "vendor/malabar-1.5-SNAPSHOT/lisp"))
-(require 'cedet)
-(semantic-load-enable-minimum-features) ;; or enable more if you wish
-(require 'malabar-mode)
-(setq malabar-groovy-lib-dir (concat prelude-dir "vendor/malabar-1.5-SNAPSHOT/lib"))
-(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
+;;(add-to-list 'load-path (concat prelude-dir "vendor/malabar-1.5-SNAPSHOT/lisp"))
+;;(require 'malabar-mode)
+;;(setq malabar-groovy-lib-dir (concat prelude-dir "vendor/malabar-1.5-SNAPSHOT/lib"))
+;;(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
+;;(require 'semanticdb-javap)
+;;(ede-java-root-project "TestProject"
+;;                       :file "~/Documents/workspace/gerrit/unuServer"
+;;                       :srcroot '("src/main" "src/test"))
+;;)
 
 ;;;; WEB
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
