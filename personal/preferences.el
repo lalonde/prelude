@@ -69,7 +69,7 @@
 ;;;; CEDET
 (semantic-mode 1)
 (global-ede-mode 1)                      ; Enable the Project management system
-;;(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
+(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
 ;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
 ;;(semantic-load-enable-minimum-features) ;; or enable more if you wish
 
@@ -144,7 +144,7 @@
 ;;(require 'malabar-mode)
 ;;(setq malabar-groovy-lib-dir (concat prelude-dir "vendor/malabar-1.5-SNAPSHOT/lib"))
 ;;(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
-;;(require 'semanticdb-javap)
+(require 'semantic/db-javap)
 ;;(ede-java-root-project "TestProject"
 ;;                       :file "~/Documents/workspace/gerrit/unuServer"
 ;;                       :srcroot '("src/main" "src/test"))
