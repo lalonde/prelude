@@ -72,6 +72,11 @@
 (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
 ;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
 ;;(semantic-load-enable-minimum-features) ;; or enable more if you wish
+(defun my-cedet-hook ()
+  (local-set-key "\C-c/" 'semantic-ia-complete-symbol-menu)
+  (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
+  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle))
+(add-hook 'c-mode-common-hook 'my-cedet-hook)
 
 ;;;; ERLANG
 (add-hook 'erlang-mode-hook (lambda () (setq truncate-lines t)))
