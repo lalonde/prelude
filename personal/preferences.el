@@ -56,6 +56,9 @@
 (setq visible-bell t)
 (tool-bar-mode 0)
 
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 ;;;; PRELUDE
 (setq prelude-whitespace nil)
 (add-hook 'text-mode-hook 'turn-off-auto-fill)
