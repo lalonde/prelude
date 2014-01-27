@@ -3,7 +3,7 @@
 ;; Copyright (C) 1999-2012 Free Software Foundation, Inc.
 
 ;; Author: michael lalonde <dirtylittle@im-a-mac-book-pro.local>
-;; Created: 2013-10-11 16:06:03-0400
+;; Created: 2014-01-27 10:01:04-0500
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 
@@ -1499,6 +1499,19 @@
       ,(semantic-lambda
 	(nth 0 vals))
       )
+     (semantic-list
+      arg-list
+      ,(semantic-lambda
+	(list
+	 (car
+	  (semantic-bovinate-from-nonterminal
+	   (car
+	    (nth 0 vals))
+	   (cdr
+	    (nth 0 vals))
+	   'function-pointer))
+	 (nth 1 vals)))
+      )
      (opt-stars
       ,(semantic-lambda
 	(list
@@ -2006,14 +2019,15 @@
       "("
       punctuation
       "\\`[*]\\'"
-      symbol
+      opt-symbol
       close-paren
       ")"
       ,(semantic-lambda
 	(list
 	 (concat
 	  "*"
-	  (nth 2 vals))))
+	  (car
+	   (nth 2 vals)))))
       )
      (open-paren
       "("

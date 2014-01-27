@@ -3,7 +3,7 @@
 ;; Copyright (C) 2002, 2003 Vladimir G. Sekissov
 
 ;; Author: michael lalonde <dirtylittle@im-a-mac-book-pro.local>
-;; Created: 2013-10-11 16:06:07-0400
+;; Created: 2014-01-27 10:01:11-0500
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 
