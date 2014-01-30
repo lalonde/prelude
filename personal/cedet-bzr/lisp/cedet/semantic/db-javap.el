@@ -102,8 +102,8 @@ including the current package onto the path.  See
 ;; above tricks for only the starting subset.  This will allow us to
 ;; perform completions in package names.
 
-(define-mode-local-override semantic-analyze-find-tag-sequence
-  java-mode (sequence &optional scope typereturn throwsym)
+(define-mode-local-override semantic-analyze-find-tag-sequence java-mode
+  (sequence &optional scope typereturn throwsym &rest flags)
   "For Java buffers, use our javap typecache as a backup search method.
 If the default returns only strings, search for the first part of sequence
 in the typecache.  Create a return list from that, and append the last

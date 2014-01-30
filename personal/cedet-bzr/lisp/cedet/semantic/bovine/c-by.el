@@ -3,7 +3,7 @@
 ;; Copyright (C) 1999-2012 Free Software Foundation, Inc.
 
 ;; Author: michael lalonde <dirtylittle@im-a-mac-book-pro.local>
-;; Created: 2014-01-27 10:01:04-0500
+;; Created: 2014-01-30 15:54:58-0500
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 

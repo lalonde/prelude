@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;; Font And Frame Setup
-(set-face-attribute 'default nil :font  "-apple-Inconsolata-medium-normal-normal-*-*-180-*-*-m-0-iso10646-1")
+;;(set-face-attribute 'default nil :font  "-apple-Inconsolata-medium-normal-normal-*-*-180-*-*-m-0-iso10646-1")
 ;;(setq default-frame-alist '( (top . 20)(left . 20)
 ;;                             (width . 160) (height . 50)))
 ;;(setq initial-frame-alist '( (top . 20) (left . 20)
@@ -70,16 +70,30 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;; CEDET
+;; select which submodes we want to activate
+;;(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+;;(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+;;(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+;;(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+;;(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
+;;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+;;(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 (semantic-mode 1)
+
+(when (cedet-ectag-version-check t)
+  (semantic-load-enable-primary-ectags-support))
 (global-ede-mode 1)                      ; Enable the Project management system
+(ede-enable-generic-projects)
 (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
-;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
-;;(semantic-load-enable-minimum-features) ;; or enable more if you wish
 (defun my-cedet-hook ()
   (local-set-key "\C-c/" 'semantic-ia-complete-symbol-menu)
   (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
   (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle))
 (add-hook 'c-mode-common-hook 'my-cedet-hook)
+
+;; Setup JAVA....
+(require 'cedet-java)
+(require 'semantic/db-javap)
 
 ;;;; ERLANG
 (add-hook 'erlang-mode-hook (lambda () (setq truncate-lines t)))
@@ -152,7 +166,6 @@
 ;;(require 'malabar-mode)
 ;;(setq malabar-groovy-lib-dir (concat prelude-dir "vendor/malabar-1.5-SNAPSHOT/lib"))
 ;;(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
-(require 'semantic/db-javap)
 ;;(ede-java-root-project "TestProject"
 ;;                       :file "~/Documents/workspace/gerrit/unuServer"
 ;;                       :srcroot '("src/main" "src/test"))
